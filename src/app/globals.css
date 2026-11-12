@@ -1,4 +1,4 @@
-@import "tailwindcss";
+/* @import "tailwindcss";
 
 :root {
   --background: #ffffff;
@@ -23,4 +23,154 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+} */
+
+@import "tailwindcss";
+
+/* =====================================================================
+   DARK MODE — follows the "dark" class on <html>
+   (set by the sun/moon toggle in the header)
+===================================================================== */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---------- base colours ---------- */
+:root {
+  --background: #ffffff;
+  --foreground: #0f172a;
+  color-scheme: light;
 }
+
+html.dark {
+  --background: #0b1220;
+  --foreground: #e2e8f0;
+  color-scheme: dark;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+/* sections that set their background with an inline style */
+html.dark .mc-root {
+  background: #0b1220 !important; /* Core Methodologies pink band */
+}
+
+/* =====================================================================
+   Whole-site dark theme
+   Swaps the light colours used across the site (bg-white, text-slate-600,
+   border-gray-200, light gradients…) for dark ones when dark mode is on.
+   Brand colours, coloured panels, images and white-on-blue buttons stay.
+   Low specificity, so hover: and dark: classes in components still win.
+===================================================================== */
+@layer utilities {
+  /* ---------- surfaces: white cards / panels ---------- */
+  :where(.dark) .bg-white { background-color: #111a2e; }
+  :where(.dark) .bg-white\/60 { background-color: rgb(17 26 46 / 0.6); }
+  :where(.dark) .bg-white\/70 { background-color: rgb(17 26 46 / 0.7); }
+  :where(.dark) .bg-white\/80 { background-color: rgb(17 26 46 / 0.8); }
+  :where(.dark) .bg-white\/85 { background-color: rgb(17 26 46 / 0.85); }
+  :where(.dark) .bg-white\/90 { background-color: rgb(17 26 46 / 0.9); }
+  :where(.dark) .bg-white\/95 { background-color: rgb(17 26 46 / 0.95); }
+
+  /* ---------- page / section backgrounds ---------- */
+  :where(.dark) .bg-\[\#F8FAFC\],
+  :where(.dark) .bg-\[\#F7FAFD\],
+  :where(.dark) .bg-\[\#f4f7fa\],
+  :where(.dark) .bg-\[\#E1EDFF\],
+  :where(.dark) .bg-slate-50,
+  :where(.dark) .bg-gray-50 { background-color: #0b1220; }
+
+  /* ---------- soft tinted boxes, chips, icon tiles ---------- */
+  :where(.dark) .bg-\[\#f0f7ff\],
+  :where(.dark) .bg-\[\#F0F8FE\],
+  :where(.dark) .bg-\[\#F2F8FD\],
+  :where(.dark) .bg-\[\#FAFCFE\],
+  :where(.dark) .bg-\[\#EAF4FD\],
+  :where(.dark) .bg-\[\#EEF6FC\],
+  :where(.dark) .bg-\[\#EAF5FD\],
+  :where(.dark) .bg-\[\#DCEFFC\],
+  :where(.dark) .bg-\[\#F5F3FF\],
+  :where(.dark) .bg-blue-50 { background-color: rgb(35 142 209 / 0.12); }
+
+  :where(.dark) .bg-gray-100,
+  :where(.dark) .bg-slate-100,
+  :where(.dark) .bg-slate-100\/80 { background-color: rgb(255 255 255 / 0.07); }
+
+  :where(.dark) .bg-\[\#EDEFF2\] { background-color: rgb(255 255 255 / 0.07); } /* hero skeleton bars */
+  :where(.dark) .bg-\[\#FBFAF7\] { background-color: #f4f1ea; } /* keep image frame light */
+
+  /* ---------- light gradients ---------- */
+  :where(.dark) .from-white,
+  :where(.dark) .from-\[\#f0f7ff\],
+  :where(.dark) .from-\[\#F7FAFD\],
+  :where(.dark) .from-\[\#F1F8FE\],
+  :where(.dark) .from-\[\#F2F8FD\],
+  :where(.dark) .from-\[\#EAF5FD\],
+  :where(.dark) .from-\[\#EAF4FD\] { --tw-gradient-from: #0b1220; }
+
+  :where(.dark) .via-white { --tw-gradient-via: #0d1527; }
+
+  :where(.dark) .to-white,
+  :where(.dark) .to-\[\#FBF7FF\],
+  :where(.dark) .to-\[\#EAF5FD\],
+  :where(.dark) .to-\[\#D6ECFB\] { --tw-gradient-to: #0b1220; }
+
+  /* contact form consent box */
+  :where(.dark) .from-emerald-50 { --tw-gradient-from: rgb(16 185 129 / 0.1); }
+  :where(.dark) .via-cyan-50 { --tw-gradient-via: rgb(6 182 212 / 0.08); }
+  :where(.dark) .to-sky-50 { --tw-gradient-to: rgb(14 165 233 / 0.08); }
+  :where(.dark) .border-emerald-200 { border-color: rgb(16 185 129 / 0.3); }
+
+  /* ---------- text ---------- */
+  :where(.dark) .text-black,
+  :where(.dark) .text-\[\#0f172a\],
+  :where(.dark) .text-\[\#0F172A\],
+  :where(.dark) .text-\[\#0B1B3A\],
+  :where(.dark) .text-gray-900,
+  :where(.dark) .text-slate-900,
+  :where(.dark) .text-gray-800,
+  :where(.dark) .text-slate-800 { color: #f1f5f9; }
+
+  :where(.dark) .text-gray-700,
+  :where(.dark) .text-slate-700 { color: #cbd5e1; }
+
+  :where(.dark) .text-gray-600,
+  :where(.dark) .text-slate-600,
+  :where(.dark) .text-gray-500,
+  :where(.dark) .text-slate-500 { color: #94a3b8; }
+
+  :where(.dark) .text-\[\#07548B\],
+  :where(.dark) .text-\[\#166ba8\] { color: #6cc4f5; }
+
+  :where(.dark) .text-\[\#1D63D8\],
+  :where(.dark) .text-blue-600 { color: #60a5fa; }
+
+  /* ---------- borders ---------- */
+  :where(.dark) .border-gray-100,
+  :where(.dark) .border-gray-200,
+  :where(.dark) .border-gray-300,
+  :where(.dark) .border-slate-100,
+  :where(.dark) .border-slate-200,
+  :where(.dark) .border-slate-200\/80,
+  :where(.dark) .border-blue-50,
+  :where(.dark) .border-blue-100,
+  :where(.dark) .border-blue-200 { border-color: rgb(255 255 255 / 0.1); }
+
+  /* ---------- form fields ---------- */
+  :where(.dark) input,
+  :where(.dark) textarea,
+  :where(.dark) select { color: #f1f5f9; }
+  :where(.dark) input::placeholder,
+  :where(.dark) textarea::placeholder { color: #64748b; }
+  :where(.dark) option { background-color: #111a2e; color: #f1f5f9; }
+
+  /* ---------- keep these white in dark mode ---------- */
+  /* graphics inside the coloured methodology panels */
+  :where(.dark) .mc-root .bg-white { background-color: #ffffff; }
+}
+
+/* =====================================================================
+   Keep any other styles you already had in globals.css below this line
+   (fonts, @theme settings, custom classes…).
+===================================================================== */
